@@ -52,7 +52,9 @@ $(function(){
 
 	setEvents();
 
-
+    $('#summernote').summernote({
+        height: 200
+    });
 
 });
 

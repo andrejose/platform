@@ -13,7 +13,7 @@ $stmt->execute();
 $config = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 if (!isset($config[0])) {
-	$sql = "INSERT INTO configuration (id, title, answered, access, back, stop) VALUES (1, '', '', '', '', '')";
+	$sql = "INSERT INTO configuration (id, title, intro, answered, access, back, stop) VALUES (1, '', '', '', '', '', '')";
     $stmt = $db->prepare($sql);
     $stmt->execute();
 
@@ -63,6 +63,12 @@ foreach($sessions as $key => $value) {
                 <h1><?php echo $config['title'] ?></h1>
 			</header>
 			<div class="main">
+	            <?php if ($config['intro']) : ?>
+				<div id="intro">
+	            	<?php echo $config['intro'] ?>
+		            <hr>
+		        </div>
+	        	<?php endif; ?>
 				<?php if (!$config['title']) : ?>
 				<p>Parece que o sistema ainda não foi configurado. Acesse a área administrativa pelo link:</p>
 				<p><a href="admin.php" class="button">Área administrativa</a></p>

@@ -33,6 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 				// UPDATE CONFIGURATION
 				$sql = "UPDATE configuration SET
 					title = :title,
+					intro = :intro,
 					answered = :answered,
 					access = :access,
 					back = :back,
@@ -40,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 					WHERE id = '1'";
 	    	    $stmt = $db->prepare($sql);
 	    	    $stmt->bindValue(":title", $_POST['title'], PDO::PARAM_STR);
+	    	    $stmt->bindValue(":intro", $_POST['intro'], PDO::PARAM_STR);
 	    	    $stmt->bindValue(":answered", $_POST['answered'], PDO::PARAM_STR);
 	    	    $stmt->bindValue(":access", $_POST['access'], PDO::PARAM_STR);
 	    	    $stmt->bindValue(":back", $_POST['back'], PDO::PARAM_STR);
@@ -264,10 +266,13 @@ if ($template == 'configuration') {
 		<!-- CSS -->
 		<link rel="stylesheet" href="assets/css/bootstrap.min.css">
 		<link rel="stylesheet" href="assets/css/sb-admin.css">
+		<link rel="stylesheet" href="assets/js/summernote/summernote-bs4.css">
 
 		<!-- JS -->
-		<script src="assets/js/modernizr.custom.js"></script>
-        <script src="assets/js/jquery-2.1.1.min.js"></script>
+        <script src="assets/js/jquery-3.3.1.slim.min.js"></script>
+        <script src="assets/js/popper.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="assets/js/summernote/summernote-bs4.min.js"></script>
         <script src="assets/js/admin.js"></script>
 
 	</head>
@@ -339,6 +344,12 @@ if ($template == 'configuration') {
 									</div>
 								</div>
 							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm">
+  								<textarea id="summernote" name="intro"><?php echo $config['intro'] ?></textarea>
+  								<br>
+  							</div>
 						</div>
 						<h6>Traduções</h6>
 						<div class="row">
